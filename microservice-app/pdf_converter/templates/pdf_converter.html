@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PDF to Word Converter</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='pdf_converter.css') }}"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="main-wrapper">
+      <div class="converter-card">
+        <h1>📄 PDF ➜ Word Converter</h1>
+        <p>Upload your PDF and convert it to Word easily!</p>
+
+        <form id="pdf-form" enctype="multipart/form-data">
+          <!-- Custom styled label for file input -->
+          <label for="file-input">📂 Choose a PDF</label>
+          <input
+            type="file"
+            name="file"
+            id="file-input"
+            accept=".pdf"
+            required
+          />
+
+          <button type="submit">Convert</button>
+        </form>
+
+        <div id="progress-container" class="hidden">
+          <div id="progress-bar"></div>
+        </div>
+
+        <div id="message" class="info">Waiting for upload...</div>
+
+        <a id="download-btn" class="hidden" href="#" download>Download Word File</a>
+      </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='pdf_converter.js') }}"></script>
+  </body>
+</html>

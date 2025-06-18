@@ -1,0 +1,33 @@
+my folder sturcture
+project-root/
+├── frontend/
+│   ├── templates/
+│   │   └── home.html
+│   │   └── youtube.html
+│   │   └── ...
+│   └── static/
+│       └── style.css
+├── gateway/
+│   └── app.py
+|---music_service
+     app.py
+|---pfd_converter
+     app.py 
+
+your_project/
+
+├── gateway
+    app.py
+|---frontend
+├── templates/
+│   ├── home.html
+│   ├── text_to_audio.html
+│   ├── pdf_converter.html
+│   ├── youtube.html
+│   └── music_player.html
+└── static/
+    ├── home.css
+    ├── style.css
+    └── music.css
+|---audio_converter
+     app.py

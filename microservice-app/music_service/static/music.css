@@ -1,0 +1,130 @@
+body {
+  font-family: "Segoe UI", sans-serif;
+  background: linear-gradient(to right, #6a11cb, #2575fc);
+  color: #fff;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 1000px;
+  margin: 50px auto;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.5);
+}
+
+h1 {
+  text-align: center;
+  color: #ffeb3b;
+  margin-bottom: 30px;
+  font-size: 2.5em;
+}
+
+.main-content {
+  display: flex;
+  gap: 40px;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.upload-section,
+.playlist-section {
+  flex: 1;
+  min-width: 300px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.file-upload {
+  background: #ff4081;
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.file-upload:hover {
+  background: #f50057;
+}
+
+.file-upload input {
+  display: none;
+}
+
+form button {
+  background: #00e676;
+  color: #000;
+  padding: 10px 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+form button:hover {
+  background: #00c853;
+}
+
+audio {
+  width: 100%;
+  margin-top: 20px;
+  border-radius: 6px;
+  background: #222;
+  outline: none;
+}
+
+h3 {
+  color: #ffeb3b;
+  margin-bottom: 10px;
+  font-size: 1.5em;
+}
+
+#music-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#music-list li {
+  padding: 10px 16px;
+  background: linear-gradient(to right, #42a5f5, #7c4dff);
+  border-radius: 8px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  color: #fff;
+  font-weight: 500;
+}
+
+#music-list li:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+}
+.play-button {
+  background-color: #e53935; /* Red background */
+  color: white; /* White text */
+  border: none;
+  padding: 8px 16px;
+  font-size: 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-left: 10px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.play-button:hover {
+  background-color: #b71c1c; /* Darker red on hover */
+  transform: scale(1.05);
+}

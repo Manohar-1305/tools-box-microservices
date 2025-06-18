@@ -1,0 +1,130 @@
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  background: #121212;
+  color: #f4f4f4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.converter-wrapper {
+  background: #1f1f1f;
+  padding: 40px 30px;
+  border-radius: 15px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  max-width: 600px;
+  width: 90%;
+  text-align: center;
+}
+
+h1 {
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+
+.description {
+  margin-bottom: 20px;
+  color: #aaa;
+}
+
+textarea#text-input {
+  width: 100%;
+  height: 150px;
+  padding: 15px;
+  border-radius: 10px;
+  border: none;
+  resize: vertical;
+  font-size: 16px;
+  background: #2a2a2a;
+  color: #fff;
+  font-family: "Poppins", sans-serif;
+  box-sizing: border-box;
+}
+
+#convert-btn {
+  margin-top: 20px;
+  padding: 12px 24px;
+  font-size: 16px;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  border: none;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+#convert-btn:hover {
+  transform: scale(1.05);
+}
+
+/* Progress container */
+#progress-container {
+  margin-top: 25px;
+  width: 100%;
+  height: 20px;
+  background: #333;
+  border-radius: 10px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Progress bar with animation */
+#progress-bar {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(135deg, #43e97b, #38f9d7);
+  background-size: 200% 100%;
+  animation: glow-stripes 2s linear infinite;
+  transition: width 0.3s ease-in-out;
+  border-radius: 10px;
+}
+
+@keyframes glow-stripes {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+#progress-text {
+  position: absolute;
+  top: -28px;
+  right: 0;
+  font-size: 14px;
+  color: #ccc;
+  font-weight: 500;
+}
+
+audio {
+  margin-top: 25px;
+  width: 100%;
+}
+
+.download-link {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 20px;
+  background: #38f9d7;
+  color: #111;
+  font-weight: bold;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: background 0.3s;
+}
+
+.download-link:hover {
+  background: #2ed9c3;
+}
+
+.status-text {
+  margin-top: 15px;
+  font-size: 14px;
+  color: #888;
+}
+
+.hidden {
+  display: none;
+}

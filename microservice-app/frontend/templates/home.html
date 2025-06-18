@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>🛠️ Miscellaneous Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}" />
+</head>
+<body>
+  <button class="dark-toggle" onclick="toggleDarkMode()" title="Toggle Dark Mode">🌙</button>
+
+  <div class="main-container">
+    <h1 class="main-title">✨ Magical Toolbox</h1>
+    <div class="cards-wrapper">
+      <div class="tool-card gradient-blue">
+        <div class="tool-icon">🗣️</div>
+        <h2>Text to Audio</h2>
+        <a href="{{ url_for('convert_ui') }}" class="tool-button">Try</a>
+      </div>
+
+      <div class="tool-card gradient-green">
+        <div class="tool-icon">📄</div>
+        <h2>PDF to Word</h2>
+        <a href="{{ url_for('pdf_converter_ui') }}" class="tool-button">Convert</a>
+      </div>
+
+      <div class="tool-card gradient-purple">
+        <div class="tool-icon">📥</div>
+        <h2>YouTube Downloader</h2>
+        <a href="{{ url_for('youtube_ui') }}" class="tool-button">Download</a>
+      </div>
+
+      <div class="tool-card gradient-orange">
+        <div class="tool-icon">🎵</div>
+        <h2>Music Player</h2>
+        <a href="{{ url_for('music_ui') }}" class="tool-button">Play</a>
+      </div>
+<div class="tool-card gradient-red">
+  <div class="tool-icon">📝</div>
+  <h2>Word to PDF</h2>
+  <a href="{{ url_for('word_to_pdf_ui') }}" class="tool-button">Convert</a>
+</div>
+
+    </div>
+  </div>
+
+  <script>
+    function toggleDarkMode() {
+      document.body.classList.toggle("dark-mode");
+      const toggleBtn = document.querySelector(".dark-toggle");
+      toggleBtn.textContent = document.body.classList.contains("dark-mode") ? "☀️" : "🌙";
+    }
+  </script>
+</body>
+</html>

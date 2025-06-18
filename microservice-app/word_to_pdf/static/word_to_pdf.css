@@ -1,0 +1,123 @@
+/* Body styling */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f0f0f0; /* Light grey background */
+    color: #333;
+}
+
+/* Centered container */
+.container {
+    max-width: 500px;
+    margin: 60px auto;
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    text-align: center;
+}
+
+/* Heading */
+h1 {
+    background: linear-gradient(90deg, #ff6a00, #ee0979);
+    
+    /* Vendor-prefixed and standard property for background-clip */
+    -webkit-background-clip: text;
+    background-clip: text; /* standard, for future-proofing */
+
+    /* Vendor-prefixed for text fill (required for visible gradient text) */
+    -webkit-text-fill-color: transparent;
+}
+
+/* File input */
+input[type="file"] {
+    margin-bottom: 16px;
+    font-size: 16px;
+    padding: 6px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background-color: #fff;
+    width: 100%;
+}
+
+/* Convert button */
+button[type="submit"] {
+    background: linear-gradient(135deg, #00f260, #0575e6);
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+button[type="submit"]:hover {
+    transform: scale(1.05);
+}
+
+/* Progress bar container */
+.progress-bar-container {
+    margin-top: 20px;
+    background-color: #ddd;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+/* Vibrant gradient bar */
+.progress-bar {
+    height: 24px;
+    width: 0%;
+    background: linear-gradient(90deg, #12c2e9, #c471ed, #f64f59);
+    color: white;
+    text-align: center;
+    line-height: 24px;
+    transition: width 0.3s ease;
+    font-weight: bold;
+}
+
+/* Download link button style */
+#downloadLink {
+    display: inline-block;
+    margin-top: 20px;
+    background: linear-gradient(135deg, #f7971e, #ffd200);
+    color: white;
+    padding: 10px 16px;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: transform 0.2s ease;
+    font-weight: bold;
+}
+
+#downloadLink:hover {
+    transform: scale(1.05);
+}
+
+/* Hidden class */
+.hidden {
+    display: none;
+}
+
+/* Convert Another File button */
+.black-button {
+    margin-top: 20px;
+    background: linear-gradient(to right, #000000, #434343);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: transform 0.2s ease;
+}
+
+.black-button:hover {
+    transform: scale(1.05);
+}
+
+/* Conversion message */
+#message {
+    margin-top: 16px;
+    font-weight: bold;
+    font-size: 16px;
+}
