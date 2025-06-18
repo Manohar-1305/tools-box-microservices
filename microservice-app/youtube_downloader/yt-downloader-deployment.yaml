@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: yt-downloader
+  labels:
+    app: yt-downloader
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: yt-downloader
+  template:
+    metadata:
+      labels:
+        app: yt-downloader
+    spec:
+      containers:
+      - name: yt-downloader
+        image: manoharshetty507/yt-downloader-app:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 5002
+        volumeMounts:
+        - name: download-storage
+          mountPath: /app/downloads
+      volumes:
+      - name: download-storage
+        emptyDir: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: yt-downloader-service
+spec:
+  selector:
+    app: yt-downloader
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 5002
+  type: NodePort
