@@ -5,12 +5,8 @@ import config
 from io import BytesIO
 
 
-# Frontend paths
-base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
-template_dir = os.path.join(base_dir, 'frontend', 'templates')
-static_dir = os.path.join(base_dir, 'frontend', 'static')
 
-app = Flask(__name__, template_folder=template_dir, static_folder=static_dir)
+app = Flask(__name__)
 
 PDF_SERVICE = config.PDF_SERVICE
 YTDL_SERVICE = config.YTDL_SERVICE
