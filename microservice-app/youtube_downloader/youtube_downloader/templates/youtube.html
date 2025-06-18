@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>YouTube Downloader</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='youtube.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h1>YouTube Downloader</h1>
+
+    <div class="input-group">
+      <input type="text" id="urlInput" placeholder="Enter YouTube video or playlist URL" />
+      <button onclick="fetchVideos()">Fetch Videos</button>
+    </div>
+
+    <div id="message" class="message"></div>
+
+    <div id="videoList" class="video-list"></div>
+
+    <div id="progressBarContainer" class="progress-bar-container" style="display: none;">
+      <div id="progressBar" class="progress-bar"></div>
+    </div>
+  </div>
+
+  <script>
+    function fetchVideos() {
+      const url = document.getElementById('urlInput').value.trim();
+      const message = document.getElementById('message');
+      const videoList = document.getElementById('videoList');
+      videoList.innerHTML = '';
+      message.textContent = '';
+
+      if (!url) {
+        message.textContent = "Please enter a YouTube URL.";
+        return;
+      }
+
+      fetch(`/fetch_playlist?url=${encodeURIComponent(url)}`)
+        .then(res => res.json())
+        .then(data => {
+          if (data.error) {
+            message.textContent = data.error;
+          } else {
+            if (data.videos.length === 0) {
+              message.textContent = "No videos found.";
+              return;
+            }
+
+            data.videos.forEach(video => {
+              const div = document.createElement('div');
+              div.className = 'video-item';
+
+              const title = document.createElement('span');
+              title.textContent = video.title;
+
+              const button = document.createElement('button');
+              button.textContent = 'Download';
+              button.onclick = () => downloadVideo(video.url, video.title);
+
+              div.appendChild(title);
+              div.appendChild(button);
+              videoList.appendChild(div);
+            });
+          }
+        })
+        .catch(err => {
+          console.error(err);
+          message.textContent = "Failed to load playlist/videos.";
+        });
+    }
+
+    function updateProgress(percent) {
+      const container = document.getElementById('progressBarContainer');
+      const bar = document.getElementById('progressBar');
+
+      if (percent === 0) {
+        container.style.display = 'none';
+      } else {
+        container.style.display = 'block';
+        bar.style.width = percent + '%';
+      }
+    }
+
+    function downloadVideo(videoUrl, title) {
+      updateProgress(10);
+      const xhr = new XMLHttpRequest();
+      xhr.responseType = 'blob';
+
+      xhr.onprogress = function (event) {
+        if (event.lengthComputable) {
+          const percent = Math.round((event.loaded / event.total) * 100);
+          updateProgress(percent);
+        }
+      };
+
+      xhr.onload = function () {
+        if (xhr.status === 200) {
+          const blob = xhr.response;
+          const downloadUrl = window.URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = downloadUrl;
+          a.download = `${title}.mp4`;
+          document.body.appendChild(a);
+          a.click();
+          a.remove();
+        } else {
+          document.getElementById('message').textContent = 'Download failed.';
+        }
+        updateProgress(0);
+      };
+
+      xhr.onerror = function () {
+        document.getElementById('message').textContent = 'Network error.';
+        updateProgress(0);
+      };
+
+      xhr.open('GET', `/download_best?url=${encodeURIComponent(videoUrl)}`, true);
+      xhr.send();
+    }
+  </script>
+</body>
+</html>
