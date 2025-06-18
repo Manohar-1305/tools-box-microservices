@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: audio-converter
+  labels:
+    app: audio-converter
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: audio-converter
+  template:
+    metadata:
+      labels:
+        app: audio-converter
+    spec:
+      containers:
+      - name: audio-converter
+        image: text-to-audio-app:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 5003
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: audio-converter-service
+spec:
+  selector:
+    app: audio-converter
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 5003
+  type: NodePort
