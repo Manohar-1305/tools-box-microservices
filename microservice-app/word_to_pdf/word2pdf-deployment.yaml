@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: word2pdf
+  labels:
+    app: word2pdf
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: word2pdf
+  template:
+    metadata:
+      labels:
+        app: word2pdf
+    spec:
+      containers:
+        - name: word2pdf
+          image: manoharshetty507/word2pdf-service:latest  # Change this to your image
+          ports:
+            - containerPort: 5005
+          volumeMounts:
+            - name: uploads
+              mountPath: /app/uploads
+            - name: converted
+              mountPath: /app/converted
+          env:
+            - name: PYTHONUNBUFFERED
+              value: "1"
+      volumes:
+        - name: uploads
+          emptyDir: {}
+        - name: converted
+          emptyDir: {}
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: word2pdf-service
+  labels:
+    app: word2pdf
+spec:
+  selector:
+    app: word2pdf
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: 5005
