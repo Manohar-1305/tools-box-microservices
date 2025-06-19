@@ -25,4 +25,5 @@ def convert():
     return send_file(mp3_fp, mimetype='audio/mpeg', as_attachment=False, download_name='output.mp3')
 
 if __name__ == '__main__':
-    app.run(port=5003, debug=True)
+    app.run(port=5003, host='0.0.0.0', debug=True)
+
