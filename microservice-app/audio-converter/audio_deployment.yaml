@@ -2,8 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: audio-converter
-  labels:
-    app: audio-converter
 spec:
   replicas: 1
   selector:
@@ -24,12 +22,12 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: audio-converter-service
+  name: audio-service
 spec:
   selector:
     app: audio-converter
   ports:
-  - protocol: TCP
-    port: 80
-    targetPort: 5003
-  type: NodePort
+    - protocol: TCP
+      port: 5003
+      targetPort: 5003
+  type: ClusterIP
