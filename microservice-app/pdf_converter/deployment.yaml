@@ -16,13 +16,13 @@ spec:
     spec:
       containers:
         - name: pdf2word-container
-          image: manoharshetty507/pdf2word-service:latest
+          image: pdf2word-service:latest   # Use local image name
+          imagePullPolicy: Never           # Important to avoid pulling from Docker Hub
           ports:
-            - containerPort: 5001
+            - containerPort: 50002
           env:
             - name: FLASK_ENV
               value: "production"
-
 ---
 apiVersion: v1
 kind: Service
@@ -31,8 +31,9 @@ metadata:
 spec:
   selector:
     app: pdf2word
+  type: NodePort
   ports:
     - protocol: TCP
       port: 80
-      targetPort: 5001
-  type: ClusterIP
+      targetPort: 50002
+      nodePort: 30002
