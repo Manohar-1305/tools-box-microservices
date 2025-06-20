@@ -4,7 +4,7 @@ from flask import Flask, request, render_template, jsonify, send_file, redirect,
 import config
 from io import BytesIO
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder=None)
 
 PDF_SERVICE = config.PDF_SERVICE
 YTDL_SERVICE = config.YTDL_SERVICE
@@ -36,17 +36,28 @@ from flask import Response  # Don't forget this import
 @app.route('/convert')
 def convert_ui():
     try:
-        resp = requests.get(f"{AUDIO_SERVICE}/convert")
-        return Response(resp.content, status=resp.status_code, content_type=resp.headers.get("Content-Type"))
+        resp = requests.get(f'{AUDIO_SERVICE}/convert')
+        return Response(
+            resp.content,
+            status=resp.status_code,
+            content_type=resp.headers.get('Content-Type', 'text/html')
+        )
     except requests.exceptions.RequestException as e:
-        return jsonify({'error': 'Audio service unavailable', 'details': str(e)}), 503
+        return Response(f"Error contacting audio service: {str(e)}", status=500)
 
-
-@app.route('/audio-static/<path:filename>')
-def proxy_audio_static(filename):
-    static_url = f'{AUDIO_SERVICE}/static/{filename}'
-    resp = requests.get(static_url)
-    return Response(resp.content, status=resp.status_code, content_type=resp.headers['Content-Type'])
+# Proxy /static/*
+@app.route('/static/<path:filename>')
+def audio_static_proxy(filename):
+    try:
+        static_url = f"{AUDIO_SERVICE}/static/{filename}"
+        resp = requests.get(static_url)
+        return Response(
+            resp.content,
+            status=resp.status_code,
+            content_type=resp.headers.get('Content-Type', 'application/octet-stream')
+        )
+    except requests.exceptions.RequestException as e:
+        return Response(f"Static file not found: {str(e)}", status=404)
 
 @app.route('/music')
 def music_ui():
@@ -149,6 +160,8 @@ def convert_wordtopdf():
         )
     except requests.exceptions.RequestException as e:
         return jsonify({'error': 'Word2PDF service unavailable', 'details': str(e)}), 503
+
+
 
 @app.route('/gateway', methods=['GET'])
 def gateway_status():
