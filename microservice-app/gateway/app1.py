@@ -18,10 +18,13 @@ WORD2PDF_SERVICE = config.WORD2PDF_SERVICE
 def home():
     return render_template('home.html')
 
+@app.route('/pdf_converter')
+def pdf_converter_ui():
+    return redirect(f'{PDF_SERVICE}/pdf_converter', code=302)
+
 @app.route('/word_to_pdf', methods=['GET'])
 def word_to_pdf_ui():
-    return redirect(f'{WORD2PDF_SERVICE}/', code=302)
-
+    return redirect(f'{WORD2PDF_SERVICE}/pdf_converter', code=302)
 
 @app.route('/youtube')
 def youtube_ui():
@@ -34,10 +37,6 @@ def convert_ui():
 @app.route('/music')
 def music_ui():
     return redirect(f'{MUSIC_SERVICE}/music', code=302)
-
-@app.route('/word_to_pdf', methods=['GET'])
-def word_to_pdf_ui():
-    return redirect(f'{WORD2PDF_SERVICE}/pdf_converter', code=302)
 
 # ---------------- API Routes ---------------- #
 
