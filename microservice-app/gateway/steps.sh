@@ -4,4 +4,21 @@ kubectl apply -f gateway.yaml
 http://localhost:30000
 
 
-kind load docker-image microservice-gateway:latest --name multi-node-cluster
+
+docker build -t microservice-gateway:latest .
+docker build -t audio-service:latest .
+docker network create microservices-net
+
+docker run -d \
+  --name audio-service \
+  --network microservices-net \
+  -p 5003:5003 \
+  audio-service:latest
+  
+docker run -d \
+  --name gateway \
+  --network microservices-net \
+  -p 5000:5000 \
+  -e AUDIO_SERVICE_URL=http://audio-service:5003 \
+  microservice-gateway:latest
+
