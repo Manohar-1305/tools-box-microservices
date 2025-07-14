@@ -28,7 +28,7 @@ spec:
     app: audio-converter
   ports:
     - protocol: TCP
-      port: 5003
-      targetPort: 5003
-      nodePort: 30001
+      port: 5003        # ClusterIP service port
+      targetPort: 5003  # Container port
+      nodePort: 30001   # External access on localhost:30001
   type: NodePort
