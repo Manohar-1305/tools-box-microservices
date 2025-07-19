@@ -30,7 +30,7 @@ def youtube_ui():
 
 @app.route('/convert')
 def convert_ui():
-    return redirect(f'{AUDIO_SERVICE}/convert', code=302)
+    return redirect("http://audioservice:5003/convert", code=302)
 
 @app.route('/music')
 def music_ui():
