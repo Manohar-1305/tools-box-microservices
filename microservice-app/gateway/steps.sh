@@ -41,3 +41,25 @@ docker run -d \
   docker exec -it gateway curl http://audioservice:5003/convert
 docker exec -it gateway ping audio-service
 
+================
+docker rm -f gateway audio-service  # clean up first if needed
+
+# Start audio-service with the correct name
+docker run -d \
+  --name audio-service \
+  --network microservice-net \
+  -p 5003:5003 \
+  text-to-audio-app
+
+# Start gateway service
+docker run -d \
+  --name gateway \
+  --network microservice-net \
+  -p 5000:5000 \
+  microservice-gateway
+
+docker exec -it gateway apt update && apt install -y iputils-ping curl
+docker exec -it gateway ping audio-service
+docker exec -it gateway curl http://audio-service:5003/convert
+
+
