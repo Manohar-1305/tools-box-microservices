@@ -13,7 +13,7 @@ docker run -d \
   --name audio-service \
   --network microservices-net \
   -p 5003:5003 \
-  audio-service:latest
+  text-to-audio-app:latest
   
 docker run -d \
   --name gateway \
