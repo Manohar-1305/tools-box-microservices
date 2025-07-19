@@ -62,4 +62,9 @@ docker exec -it gateway apt update && apt install -y iputils-ping curl
 docker exec -it gateway ping audio-service
 docker exec -it gateway curl http://audio-service:5003/convert
 
+docker exec -it gateway curl -X POST http://audio-service:5003/convert \
+  -H "Content-Type: application/json" \
+  -d '{"text": "Hello, this is a test"}' --output test.mp3
+  
+docker cp gateway:/tmp/test.mp3 .
 
