@@ -39,5 +39,5 @@ docker run -d \
   microservice-gateway
 
   docker exec -it gateway curl http://audioservice:5003/convert
-
+docker exec -it gateway ping audio-service
 
